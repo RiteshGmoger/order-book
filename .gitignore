@@ -1,0 +1,33 @@
+# Compiled binary
+order_book
+order_book.exe
+
+# Object files
+*.o
+*.obj
+
+# Build artifacts
+*.out
+*.app
+build/
+bin/
+
+# Editor garbage
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Mac garbage
+.DS_Store
+.AppleDouble
+
+# Linux garbage
+*~
+
+# Logs
+*.log
+
+# Dependency files
+*.d
