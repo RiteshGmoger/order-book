@@ -9,7 +9,8 @@ int main() {
     book.add_order({2, "buy",  100.0, 5,  2});
     book.add_order({3, "sell", 101.0, 15, 3});
     book.add_order({4, "sell", 100.5, 8,  4});
-
+    
+    book.cancel_order(1);
     book.print_book();
 
     return 0;

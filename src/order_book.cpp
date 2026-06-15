@@ -1,47 +1,56 @@
 #include "order_book.h"
 #include <iostream>
-using namespace std;
 
-void OrderBook::add_order(Order o)
+void OrderBook::add_order(const Order& o)
 {
     if (o.side == "buy")
         bids[o.price].push_back(o);
     else
         asks[o.price].push_back(o);
         
-    cout<<"Added "<< o.side<<" order: "<< o.quantity<<" @ "<< o.price<<" (id=" <<o.id<< ")"<<endl;
+    cancel[o.id] = false; 
+    std::cout<<"Added "<<o.side<<" order : "<<o.quantity<<" @ "<<o.price<<" ( id = " <<o.id<< " )\n";
 }
 
 void OrderBook::print_book()
 {
-    cout << "\n─── ORDER BOOK ───" << endl;
-    cout << "ASKS (sell side):" << endl;
+    std::cout<< "\n─── ORDER BOOK ─── \n";
+    std::cout<< "ASKS (sell side) :\n";
     
     for (auto it = asks.rbegin();it != asks.rend();++it)
     {
-        cout<<"  "<<it->first<<" | ";
+        std::cout<<"    "<<it->first<<" | ";
         for (auto& o : it->second)
-            cout<<"qty = "<<o.quantity<<"(id = "<<o.id<<") ";
-        cout << endl;
+        {
+            if(cancel[o.id]) continue;
+            std::cout<<"qty = "<<o.quantity<<"(id = "<<o.id<<") ";
+        }
+        std::cout<<'\n';
     }
 
-    cout<<"  ───SPREAD───  "<<endl;
-    cout<<"BIDS (buy side):"<<endl;
+    std::cout<<"\n─── SPREAD ───\n"<<'\n';
+    std::cout<<"BIDS (buy side) : \n";
     
     for (auto& [price, orders] : bids)
     {
-        cout<<"  "<<price<<" | ";
+        std::cout<<"    "<<price<<" | ";
         for (auto& o : orders)
-            cout<<"qty = "<<o.quantity<<"(id = "<<o.id<<") ";
-        cout<<endl;
+        {
+            if(cancel[o.id]) continue;
+            std::cout<<"qty = "<<o.quantity<<"(id = "<<o.id<<") ";
+        }
+        std::cout<<'\n';
     }
-    cout << "─────────────────\n" << endl;
+    std::cout<<"\n";
 }
 
-void OrderBook::cancel_order(int id) {
-    cout<<"cancel_order called for id = "<<id<<endl;
+void OrderBook::cancel_order(int id)
+{
+    cancel[id] = true;
+    std::cout<<"cancel_order called for id = "<<id<<'\n';
 }
 
-void OrderBook::match_orders() {
-    cout<<"match_orders called"<< endl;
+void OrderBook::match_orders()
+{
+    std::cout<<"match_orders called"<<'\n';
 }
