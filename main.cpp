@@ -11,6 +11,7 @@ int main() {
     book.add_order({4, "sell", 100.5, 8,  4});
     
     book.cancel_order(1);
+    book.match_orders();
     book.print_book();
 
     return 0;
