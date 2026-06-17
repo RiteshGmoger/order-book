@@ -27,7 +27,7 @@ void OrderBook::print_book()
         }
         std::cout<<'\n';
     }
-
+    
     std::cout<<"\n─── SPREAD ───\n"<<'\n';
     std::cout<<"BIDS (buy side) : \n";
     
@@ -108,4 +108,47 @@ void OrderBook::match_orders()
                 asks.erase(ask_it);
         }
     }
+}
+
+std::pair<double,double> OrderBook::get_best_bid_ask()
+{
+    double best_bid = -1.0;
+    double best_ask = -1.0;
+    
+    for(auto& [price, orders] : bids)
+    {
+        bool found = false;
+        for(auto& o : orders)
+        {
+            if(!cancel[o.id])
+            {
+                found = true;
+                break;
+            }
+        }
+        if(found)
+        {
+            best_bid = price;
+            break;
+        }
+    }
+    
+    for(auto& [price, orders] : asks)
+    {
+        bool found = false;
+        for(auto& o : orders)
+        {
+            if(!cancel[o.id])
+            {
+                found = true;
+                break;
+            }
+        }
+        if(found)
+        {
+            best_ask = price;
+            break;
+        }
+    }
+    return {best_bid, best_ask};
 }

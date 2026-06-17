@@ -1,7 +1,8 @@
 #pragma once
 #include <string>
 
-struct Order {
+struct Order
+{
     int id;
     std::string side;
     double price;

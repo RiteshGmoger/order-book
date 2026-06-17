@@ -2,7 +2,8 @@
 #include <iostream>
 using namespace std;
 
-int main() {
+int main()
+{
     OrderBook book;
 
     book.add_order({1, "buy",  100.5, 10, 1});
@@ -13,6 +14,9 @@ int main() {
     book.cancel_order(1);
     book.match_orders();
     book.print_book();
+    
+    auto [bid, ask] = book.get_best_bid_ask();
+    std::cout << "Best bid: " << bid << " | Best ask: " << ask << "\n";
 
     return 0;
 }
