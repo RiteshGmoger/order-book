@@ -27,6 +27,10 @@ make
 ## Clean
 make clean
 
+## status
 ## Status
 Week 1 complete - skeleton compiling
-Week 2 - cancel_order + match_orders (June 11)
+Week 2 complete - all 4 methods working:
+  add_order, cancel_order (lazy deletion), 
+  match_orders (price-time priority), get_best_bid_ask
+Compiles clean: g++ -std=c++20
